@@ -3,17 +3,21 @@
 apt-get -y update
 apt-get -y upgrade
 
-passwordless mysql root
+# passwordless mysql root
 debconf-set-selections <<< "mysql-server mysql-server/root_password password \"''\""
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password \"''\""
+apt-get install -y mysql-client mysql-server 
 
-basics.
-apt-get -y install git vim wget curl emacs24-nox 
+# basics.
+apt-get -y install git vim wget curl emacs24-nox gnupg
 
-LAMP
-apt-get -y install apache2 php5 php5-dev php5-xsl php5-curl php5-cli php5-intl mysql-client mysql-server
+# LAMP
+apt-get -y install apache2 php php-dev php-fxsl php-curl php-cli php-intl php-json php-mysql libapache2-mod-php 
 
-staging server
+# OwnCloud
+apt-get -y install libxml2-utils 
+
+# staging server
 apt-get -y install clamav clamav-daemon nodejs nodejs-dev npm php-pear
 
 freshclam
