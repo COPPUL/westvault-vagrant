@@ -1,0 +1,33 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: coppulpln
+    database_user: coppulpln
+    database_password: pln123
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 8e7db5d2b3a93c288ad3c2d8b36bf3c3a1211c6e
+    pln_accepting: true
+    pln_maxUploadSize: 1000000
+    pln_maxAuSize: 100000000
+    pln_uploadChecksumType: SHA-1
+    pln_defaultLocale: en-US
+    pln_journal_name: 'COPPUL PLN Deposits from OJS'
+    pln_data_dir: data
+    clamdscan_path: /usr/bin/clamdscan
+    lockssomatic_sd_iri: 'http://lom.dv/web/app_dev.php/api/sword/2.0/sd-iri'
+    staging_server_uuid: C67BAA0C-05B5-4D7D-B439-030B8D594BC5
+    terms_of_use_default_locale: en-US
+    days_silent: 60
+    router.request_context.host: 'localhost:8181'
+    router.request_context.scheme: http
+    router.request_context.base_url: /coppulpln/
+    save_deposit_xml: false
+    min_ojs_version: 2.4.8.0
+    network_accepting: 'The COPPUL PLN can accept deposits from this journal.'
+    network_oldojs: 'This journal must be running OJS 2.4.8 to make deposits to the COPPUL PLN.'
+    network_default: 'The COPPUL PLN does not know about this journal yet.'
+    remove_complete_deposits: false
