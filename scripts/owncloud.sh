@@ -31,7 +31,7 @@ git clone https://git.lib.sfu.ca/mjoyce/coppul-owncloud.git
 mv coppul-owncloud /var/www/owncloud/apps/coppulpln
 chown -R vagrant:vagrant /var/www/owncloud/apps/coppulpln
 pushd /var/www/owncloud/apps/coppulpln
-sudo -u vagrant composer install
+sudo -u vagrant COMPOSER_CACHE_DIR=/tmp/composer composer --no-progress install
 popd
   
 sudo -u www-data /var/www/owncloud/occ app:enable coppulpln 

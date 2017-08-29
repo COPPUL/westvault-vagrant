@@ -1,0 +1,28 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: lockssomatic
+    database_user: lockssomatic
+    database_password: lom123
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 122f2b8c46e8d75d42a692b8465342eb
+    site_name: LOCKSSOMatic
+    activity_log.enabled: false
+    lockss_jar_directory: data/lockss/plugins
+    lockss_checksums:
+        - SHA-1
+    lockss_aus_per_titledb: 50
+    router.request_context.host: localhost
+    router.request_context.scheme: http
+    router.request_context.base_url: /lockssomatic
+    lockss_allowed_ips:
+        - 127.0.0.1
+    lom_cached_download_dir: data/download
+    lom_nondefinitional_cpds:
+        ca.sfu.lib.plugin.pkppln.PkpPlnPlugin:
+            - manifest_url
+            - permission_url

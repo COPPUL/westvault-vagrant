@@ -23,5 +23,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: "scripts/setup.sh"
   config.vm.provision :shell, path: "scripts/staging.sh"
   config.vm.provision :shell, path: "scripts/owncloud.sh"
+  config.vm.provision :shell, path: "scripts/lockssomatic.sh"
   
 end

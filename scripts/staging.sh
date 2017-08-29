@@ -28,9 +28,9 @@ cp /vagrant/configs/coppulpln.yml app/config/parameters.yml
 chown -R vagrant:vagrant .
 setfacl -dR -m u:www-data:rwX -m u:ubuntu:rwX app/logs app/cache
 setfacl -R -m u:www-data:rwX -m u:ubuntu:rwX app/logs app/cache
-sudo -u vagrant composer install
-./bin/console doctrine:schema:create
-./bin/console fos:user:create --super-admin admin@example.com admin Admin example.com
+sudo -u vagrant COMPOSER_CACHE_DIR=/tmp/composer composer --no-progress install
+./app/console doctrine:schema:create
+./app/console fos:user:create --super-admin admin@example.com admin Admin example.com
 mysql coppulpln < /vagrant/sql/coppulpln.sql
 popd
 
