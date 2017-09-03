@@ -23,7 +23,11 @@ wget --quiet https://download.owncloud.org/community/owncloud-9.1.6.tar.bz2
 tar -xjf owncloud-9.1.6.tar.bz2
 mv owncloud /var/www/owncloud
 chown -R www-data:www-data /var/www/owncloud
- 
+
+# owncloud user skeleton
+rm -rf /var/www/owncloud/core/skeleton
+cp -r /vagrant/owncloud-skeleton /var/www/owncloud/core/skeleton
+
 # set up a database
 mysql -e "CREATE USER 'owncloud'@'localhost'"
 mysql -e "CREATE DATABASE owncloud"
