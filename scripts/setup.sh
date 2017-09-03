@@ -10,9 +10,6 @@ apt-get -y install debconf-utils
 debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
 apt-get -y install mysql-client mysql-server 
-cp /vagrant/configs/my.cnf /home/vagrant/.my.cnf
-cp /vagrant/configs/my.cnf /root/.my.cnf
-chown -R ubuntu:ubuntu /home/ubuntu
 
 # basics.
 apt-get -y install git vim wget curl emacs24-nox php-elisp gnupg zip unzip
