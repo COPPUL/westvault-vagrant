@@ -28,3 +28,6 @@ npm install --global --silent bower
 # composer
 curl -Ss https://getcomposer.org/installer | php -- --quiet --install-dir=/usr/local/bin --filename=composer
 chown -R vagrant:vagrant /home/vagrant
+
+chmod -R a+r /var/log/apache2
+chmod a+x /var/log/apache2
