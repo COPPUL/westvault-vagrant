@@ -2,8 +2,8 @@
 parameters:
     database_host: 127.0.0.1
     database_port: null
-    database_name: coppulpln
-    database_user: coppulpln
+    database_name: westvaultpln
+    database_user: westvaultpln
     database_password: pln123
     mailer_transport: smtp
     mailer_host: 127.0.0.1
@@ -15,19 +15,17 @@ parameters:
     pln_maxAuSize: 100000000
     pln_uploadChecksumType: SHA-1
     pln_defaultLocale: en-US
-    pln_journal_name: 'COPPUL PLN Deposits from OJS'
+    pln_journal_name: 'WestVault PLN Deposits from OwnCloud'
     pln_data_dir: data
     clamdscan_path: /usr/bin/clamdscan
-    lockssomatic_sd_iri: 'http://lom.dv/web/app_dev.php/api/sword/2.0/sd-iri'
-    staging_server_uuid: C67BAA0C-05B5-4D7D-B439-030B8D594BC5
+    lockssomatic_sd_iri: 'http://localhost/lockssomatic/api/sword/2.0/sd-iri'
+    staging_server_uuid: 8EDAD2D3-23C2-4D5B-8DE0-C2654D0B1001
     terms_of_use_default_locale: en-US
     days_silent: 60
     router.request_context.host: 'localhost:8181'
     router.request_context.scheme: http
-    router.request_context.base_url: /coppulpln/
-    save_deposit_xml: false
-    min_ojs_version: 2.4.8.0
-    network_accepting: 'The COPPUL PLN can accept deposits from this journal.'
-    network_oldojs: 'This journal must be running OJS 2.4.8 to make deposits to the COPPUL PLN.'
-    network_default: 'The COPPUL PLN does not know about this journal yet.'
+    router.request_context.base_url: /westvaultpln/
+    save_deposit_xml: true
+    network_accepting: 'The WestVault PLN can accept deposits from this institution.'
+    network_default: 'The WestVault PLN does not know about this institution yet.'
     remove_complete_deposits: false
