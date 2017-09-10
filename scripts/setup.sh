@@ -19,6 +19,7 @@ apt-get -y install apache2 php5 php5-dev php5-xsl php5-curl php5-cli php5-intl p
 	php5-mysql libapache2-mod-php5 php-pear
 pear install Archive_Tar
 a2enmod rewrite headers env dir mime
+cp /vagrant/configs/apache.ports.conf /etc/apache2/ports.conf
 service apache2 restart
 
 # node/npm/bower

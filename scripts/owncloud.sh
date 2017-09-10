@@ -23,10 +23,6 @@ pushd $HOME
 	mv owncloud /var/www/owncloud
 	chown -R www-data:www-data /var/www/owncloud
 
-	# owncloud user skeleton
-	rm -rf /var/www/owncloud/core/skeleton
-	cp -r /vagrant/owncloud-skeleton /var/www/owncloud/core/skeleton
-
 	# set up a database
 	mysql -e "CREATE USER 'owncloud'@'localhost'"
 	mysql -e "CREATE DATABASE owncloud"
@@ -42,6 +38,8 @@ pushd $HOME
 		--database-user=owncloud --database-pass=occ123 \
 		--admin-user=admin --admin-pass=admin
 
+	sudo -u www-data php /var/www/owncloud/occ config:system:set debug --value=true
+
 	# add the westvault app.
 	git clone https://github.com/ubermichael/westvault.git westvault
 	mv westvault /var/www/owncloud/apps/westvault
@@ -51,6 +49,10 @@ pushd $HOME
 	popd
 	sudo -u www-data php /var/www/owncloud/occ app:enable westvault 
 	
+	# owncloud user skeleton
+	rm -rf /var/www/owncloud/core/skeleton
+	cp -r /vagrant/owncloud-skeleton /var/www/owncloud/core/skeleton
+
 	# add some users.	
 	sudo -u www-data OC_PASS=corey php /var/www/owncloud/occ user:add --password-from-env --group=uvic corey
 	sudo -u www-data OC_PASS=mark php /var/www/owncloud/occ user:add --password-from-env --group=sfu mark
