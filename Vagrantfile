@@ -11,6 +11,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # web server  
   config.vm.network "forwarded_port", guest: 80, host: 8181
+  
+  #mysql
+  config.vm.network "forwarded_port", guest: 3306, host: 33306  
 
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "4096"
