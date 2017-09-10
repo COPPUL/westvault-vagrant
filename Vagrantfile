@@ -21,13 +21,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   shared_dir = "/vagrant"
   
-  config.vm.synced_folder "www", "/var/www", 
-  	owner: "www-data", group: "www-data", mount_options: ["dmode=700,fmode=600"]
+  config.vm.synced_folder "../westvault-web", "/var/www", 
+   	owner: "www-data", group: "www-data", mount_options: ["dmode=700,fmode=600"]
   
   config.vm.provision :shell, path: "scripts/setup.sh"
   config.vm.provision :shell, path: "scripts/user.sh"
   config.vm.provision :shell, path: "scripts/staging.sh"
-  config.vm.provision :shell, path: "scripts/owncloud.sh"
 #  config.vm.provision :shell, path: "scripts/lockssomatic.sh"
+  config.vm.provision :shell, path: "scripts/owncloud.sh"
 
 end

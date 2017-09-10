@@ -35,6 +35,7 @@ pushd $HOME
 	mysql -e "FLUSH PRIVILEGES"
 
 	# install owncloud
+	echo "Installing owncloud. This may take some time."
 	sudo -u www-data php /var/www/owncloud/occ maintenance:install \
 		--no-interaction \
 		--database=mysql --database-name=owncloud \
