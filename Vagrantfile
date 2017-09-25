@@ -9,6 +9,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64" # 14.04 LTS
   config.vm.hostname = "westvault"
 
+  # mysql. sigh.
+  config.vm.network "private_network", ip: "10.0.0.10"  
+
   # web server  
   config.vm.network "forwarded_port", guest: 80, host: 8181
   

@@ -10,6 +10,7 @@ apt-get -y install debconf-utils
 debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
 apt-get -y install mysql-client mysql-server 
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/my.cnf
 
 # basics.
 apt-get -y install git vim wget curl emacs24-nox php-elisp gnupg zip unzip

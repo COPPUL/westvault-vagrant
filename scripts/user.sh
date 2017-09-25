@@ -35,3 +35,6 @@ pushd ~vagrant
 	cp /vagrant/configs/my.cnf /home/vagrant/.my.cnf
 	chown -R vagrant:vagrant .
 popd
+
+mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';"
+mysql -e "FLUSH PRIVILEGES;"
