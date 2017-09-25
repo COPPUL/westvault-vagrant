@@ -24,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   shared_dir = "/vagrant"
   
-  config.vm.synced_folder "../westvault-web", "/var/www", 
+  config.vm.synced_folder "../web", "/var/www", 
    	owner: "www-data", group: "www-data", mount_options: ["dmode=700,fmode=600"]
   
   config.vm.provision :shell, path: "scripts/setup.sh"
