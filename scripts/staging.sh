@@ -7,7 +7,7 @@ pushd $HOME
 
 	# virus scanning
 	freshclam
-	/etc/init.d/clamav-daemon start
+	service clamav-daemon restart
 
 	# apache config
 	cp /vagrant/configs/apache.westvaultpln.conf /etc/apache2/sites-available/westvaultpln.conf
