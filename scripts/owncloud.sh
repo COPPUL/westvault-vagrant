@@ -19,7 +19,7 @@ pushd $HOME
 	wget --quiet https://download.owncloud.org/community/owncloud-9.1.6.tar.bz2
 	tar -xjf owncloud-9.1.6.tar.bz2
 	mv owncloud /var/www/owncloud
-	chown -R www-data:www-data /var/www/owncloud
+	chown -R vagrant:vagrant /var/www/owncloud
 
 	# set up a database
 	mysql -e "CREATE USER 'owncloud'@'localhost'"
@@ -31,7 +31,8 @@ pushd $HOME
 	# install owncloud
 	
 	pushd /var/www/owncloud
-		chmod u+x occ
+		
+		chmod a+x occ
 		./occ maintenance:install \
 			--no-interaction \
 			--database=mysql --database-name=owncloud \
@@ -49,11 +50,11 @@ pushd $HOME
 		popd
 		./occ app:enable westvault 
 	
-		sudo -u www-data OC_PASS=corey ./occ user:add --password-from-env --group=uvic corey
-		sudo -u www-data OC_PASS=mark ./occ user:add --password-from-env --group=sfu mark
-		sudo -u www-data OC_PASS=janice ./occ user:add --password-from-env --group=sfu janice
 		
-		chown -R vagrant:vagrant /var/www/owncloud
+		OC_PASS=corey  ./occ user:add --password-from-env --group=uvic corey
+		OC_PASS=mark   ./occ user:add --password-from-env --group=sfu mark
+		OC_PASS=janice ./occ user:add --password-from-env --group=sfu janice
+		
 		chown -R www-data:www-data config data
 		setfacl -R -m u:www-data:rwX -m u:vagrant:rwX config data
 		setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX config data
