@@ -2,8 +2,6 @@
 
 pushd $HOME
 
-	# clearing out the old owncloud instance.
-	rm -rf /var/www/owncloud
 	apt-get install -y php5-gd php5-mcrypt php5-imagick libxml2-utils python3 python3-pip
 
 	# OC Dev tool
@@ -31,31 +29,36 @@ pushd $HOME
 	mysql -e "FLUSH PRIVILEGES"
 
 	# install owncloud
-	echo "Installing owncloud. This may take some time."
-	sudo -u www-data php /var/www/owncloud/occ maintenance:install \
-		--no-interaction \
-		--database=mysql --database-name=owncloud \
-		--database-user=owncloud --database-pass=occ123 \
-		--admin-user=admin --admin-pass=admin
-
-	sudo -u www-data php /var/www/owncloud/occ config:system:set debug --value=true
-
-	# add the westvault app.
-	git clone https://github.com/ubermichael/westvault.git westvault
-	mv westvault /var/www/owncloud/apps/westvault
-	chown -R www-data:www-data /var/www/owncloud/apps/westvault
-	pushd /var/www/owncloud/apps/westvault
-		sudo -u www-data COMPOSER_CACHE_DIR=/tmp/composer composer --no-progress install
-	popd
-	sudo -u www-data php /var/www/owncloud/occ app:enable westvault 
 	
-	# owncloud user skeleton
-	rm -rf /var/www/owncloud/core/skeleton
-	cp -r /vagrant/owncloud-skeleton /var/www/owncloud/core/skeleton
+	pushd /var/www/owncloud
+		chmod u+x occ
+		sudo ./occ maintenance:install \
+			--no-interaction \
+			--database=mysql --database-name=owncloud \
+			--database-user=owncloud --database-pass=occ123 \
+			--admin-user=admin --admin-pass=admin
 
-	# add some users.	
-	sudo -u www-data OC_PASS=corey php /var/www/owncloud/occ user:add --password-from-env --group=uvic corey
-	sudo -u www-data OC_PASS=mark php /var/www/owncloud/occ user:add --password-from-env --group=sfu mark
-	sudo -u www-data OC_PASS=janice php /var/www/owncloud/occ user:add --password-from-env --group=sfu janice
+		./occ config:system:set debug --value=true
+		./occ config:system:set pln_site_url --value=http://localhost:8181/westvaultpln/web/app_dev.php/api/sword/2.0/sd-iri
+	
+		# add the westvault app.
+		git clone https://github.com/ubermichael/westvault.git apps/westvault
+		
+		chown -R vagrant:vagrant /var/www/owncloud
+		chown -R www-data:www-data /var/www/owncloud/config
+		chown -R www-data:www-data /var/www/owncloud/data
+		setfacl -R -m u:www-data:rwX -m u:vagrant:rwX config data
+		setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX config data
+
+		pushd apps/westvault
+			composer --no-progress install
+		popd
+		occ app:enable westvault 
+	
+		# add some users.	
+		sudo -u www-data OC_PASS=corey php /var/www/owncloud/occ user:add --password-from-env --group=uvic corey
+		sudo -u www-data OC_PASS=mark php /var/www/owncloud/occ user:add --password-from-env --group=sfu mark
+		sudo -u www-data OC_PASS=janice php /var/www/owncloud/occ user:add --password-from-env --group=sfu janice
+	popd
 
 popd

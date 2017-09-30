@@ -28,12 +28,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   shared_dir = "/vagrant"
   
   config.vm.provision :shell, path: "scripts/setup.sh"
-  config.vm.provision :shell, path: "scripts/samba.sh"
-  
-#   config.vm.provision :shell, path: "scripts/user.sh"
-#   config.vm.provision :shell, path: "scripts/lamp.sh"
+  config.vm.provision :shell, path: "scripts/samba.sh"  
+  config.vm.provision :shell, path: "scripts/user.sh"
+  config.vm.provision :shell, path: "scripts/lamp.sh"
 #   config.vm.provision :shell, path: "scripts/staging.sh"
-#   config.vm.provision :shell, path: "scripts/lockssomatic.sh"
 #   config.vm.provision :shell, path: "scripts/owncloud.sh"
+  
+#   config.vm.provision :shell, path: "scripts/lockssomatic.sh"
 
 end

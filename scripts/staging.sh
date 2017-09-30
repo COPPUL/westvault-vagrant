@@ -24,9 +24,14 @@ pushd $HOME
 	git clone https://github.com/ubermichael/westvault-pln.git westvaultpln
 	mv westvaultpln /var/www/westvaultpln
 	pushd /var/www/westvaultpln
+		chmod a+x app/console
 		cp /vagrant/configs/westvaultpln.yml app/config/parameters.yml
-		chown -R www-data:www-data /var/www/westvaultpln
-		sudo -u www-data COMPOSER_CACHE_DIR=/tmp/composer composer --no-progress install
+		chown -R vagrant:vagrant /var/www/westvaultpln
+		
+		setfacl -R -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs}
+        setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs}
+            
+		composer --no-progress install
 		php app/console doctrine:schema:create
 		php app/console fos:user:create --super-admin admin@example.com admin Admin example.com
 		mysql westvaultpln < /vagrant/sql/westvaultpln.sql

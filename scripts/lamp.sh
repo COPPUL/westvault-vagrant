@@ -6,11 +6,13 @@ apt-get -y install debconf-utils
 debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
 apt-get -y install mysql-client mysql-server 
-sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/my.cnf
-service mysql restart
 
-# basics.
-apt-get -y install git vim wget curl emacs24-nox php-elisp gnupg zip unzip
+cp /vagrant/configs/mysql.server.cnf /etc/mysql/my.cnf
+
+mysql --defaults-file=/vagrant/configs/my.cnf -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';"
+mysql --defaults-file=/vagrant/configs/my.cnf -e "FLUSH PRIVILEGES;"
+
+service mysql restart
 
 # LAMP
 apt-get -y install apache2 php5 php5-dev php5-xsl php5-curl php5-cli php5-intl php5-json \
