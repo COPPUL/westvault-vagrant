@@ -46,7 +46,7 @@ pushd $HOME
 		git clone https://github.com/ubermichael/westvault.git apps/westvault
 		
 		pushd apps/westvault
-			composer --no-progress install
+			/usr/local/bin/composer --no-progress install
 		popd
 		./occ app:enable westvault 
 	

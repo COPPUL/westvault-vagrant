@@ -31,7 +31,7 @@ pushd $HOME
 		setfacl -R -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs}
         setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs}
             
-		composer --no-progress install
+		/usr/local/bin/composer --no-progress install
 		php app/console doctrine:schema:create
 		php app/console fos:user:create --super-admin admin@example.com admin Admin example.com
 		mysql westvaultpln < /vagrant/sql/westvaultpln.sql
