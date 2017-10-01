@@ -27,3 +27,6 @@ curl -Ss https://getcomposer.org/installer | php -- --quiet --install-dir=/usr/l
 
 chmod -R a+r /var/log/apache2
 chmod a+x /var/log/apache2
+
+# uhh. file permissions are getting screwed up sometimes.
+chown -R www-data:www-data /var/lib/php5
