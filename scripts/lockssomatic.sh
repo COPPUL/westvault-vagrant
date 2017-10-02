@@ -17,13 +17,18 @@ pushd $HOME
 	git clone https://github.com/ubermichael/lockss-o-matic.git lockssomatic
 	mv lockssomatic /var/www/lockssomatic
 	pushd /var/www/lockssomatic
+		chmod a+x app/console
 		cp /vagrant/configs/lockssomatic.yml app/config/parameters.yml
 		chown -R vagrant:vagrant .
-		setfacl -dR -m u:www-data:rwX -m u:ubuntu:rwX app/logs app/cache
-		setfacl -R -m u:www-data:rwX -m u:ubuntu:rwX app/logs app/cache
-		sudo -u vagrant COMPOSER_CACHE_DIR=/tmp/composer composer --no-progress install
+		
+		setfacl -R -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs}
+        setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs}
+            
+		/usr/local/bin/composer --no-progress install
 		./app/console doctrine:schema:create
 		./app/console fos:user:create --super-admin admin@example.com admin Admin example.com
+		./app/console cache:clear		
+		chown -R vagrant:vagrant .
 	popd
 
 popd

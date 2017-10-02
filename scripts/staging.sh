@@ -26,7 +26,7 @@ pushd $HOME
 	pushd /var/www/westvaultpln
 		chmod a+x app/console
 		cp /vagrant/configs/westvaultpln.yml app/config/parameters.yml
-		chown -R vagrant:vagrant /var/www/westvaultpln
+		chown -R vagrant:vagrant .
 		
 		setfacl -R -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs}
         setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs}
@@ -35,6 +35,7 @@ pushd $HOME
 		php app/console doctrine:schema:create
 		php app/console fos:user:create --super-admin admin@example.com admin Admin example.com
 		mysql westvaultpln < /vagrant/sql/westvaultpln.sql
+		chown -R vagrant:vagrant .		
 	popd
 
 popd

@@ -41,7 +41,7 @@ pushd $HOME
 
 		./occ config:system:set debug --value=true
 		./occ config:system:set pln_site_url --value=http://localhost:8181/westvaultpln/web/app_dev.php/api/sword/2.0/sd-iri
-		./occ config:system:set overwrite.cli.url http://localhost:8181/owncloud
+		./occ config:system:set overwrite.cli.url --value=http://localhost:8181/owncloud
 		
 		# add the westvault app.
 		git clone https://github.com/ubermichael/westvault.git apps/westvault
