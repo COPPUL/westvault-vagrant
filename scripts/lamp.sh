@@ -7,10 +7,10 @@ debconf-set-selections <<< 'mysql-server mysql-server/root_password password roo
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
 apt-get -y install mysql-client mysql-server 
 
-cp /vagrant/configs/mysql.server.cnf /etc/mysql/my.cnf
+cp /vagrant/configs/mysql/mysql.server.cnf /etc/mysql/my.cnf
 
-mysql --defaults-file=/vagrant/configs/my.cnf -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';"
-mysql --defaults-file=/vagrant/configs/my.cnf -e "FLUSH PRIVILEGES;"
+mysql --defaults-file=/vagrant/configs/mysql/my.cnf -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';"
+mysql --defaults-file=/vagrant/configs/mysql/my.cnf -e "FLUSH PRIVILEGES;"
 
 service mysql restart
 
@@ -19,7 +19,7 @@ apt-get -y install apache2 php5 php5-dev php5-xsl php5-curl php5-cli php5-intl p
 	php5-mysql libapache2-mod-php5 php-pear
 pear install Archive_Tar
 a2enmod rewrite headers env dir mime
-cp /vagrant/configs/apache.ports.conf /etc/apache2/ports.conf
+cp /vagrant/configs/apache/apache.ports.conf /etc/apache2/ports.conf
 service apache2 restart
 
 # composer

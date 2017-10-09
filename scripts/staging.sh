@@ -10,7 +10,7 @@ pushd $HOME
 	service clamav-daemon restart
 
 	# apache config
-	cp /vagrant/configs/apache.westvaultpln.conf /etc/apache2/sites-available/westvaultpln.conf
+	cp /vagrant/configs/apache/apache.westvaultpln.conf /etc/apache2/sites-available/westvaultpln.conf
 	ln -s /etc/apache2/sites-available/westvaultpln.conf /etc/apache2/sites-enabled/westvaultpln.conf
 	service apache2 restart
 
@@ -34,6 +34,7 @@ pushd $HOME
 		/usr/local/bin/composer --no-progress install
 		php app/console doctrine:schema:create
 		php app/console fos:user:create --super-admin admin@example.com admin Admin example.com
+		php app/console fos:user:promote admin@example.com ROLE_ADMIN
 		mysql westvaultpln < /vagrant/sql/westvaultpln.sql
 		chown -R vagrant:vagrant .		
 	popd

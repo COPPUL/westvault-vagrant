@@ -11,7 +11,7 @@ pushd $HOME
 	popd
 
 	# configure apache
-	cp /vagrant/configs/apache.owncloud.conf /etc/apache2/sites-available/owncloud.conf
+	cp /vagrant/configs/apache/apache.owncloud.conf /etc/apache2/sites-available/owncloud.conf
 	ln -s /etc/apache2/sites-available/owncloud.conf /etc/apache2/sites-enabled/owncloud.conf
 	service apache2 restart
 

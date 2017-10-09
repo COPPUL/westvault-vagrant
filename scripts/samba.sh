@@ -3,7 +3,7 @@
 # https://www.howtogeek.com/howto/ubuntu/install-samba-server-on-ubuntu/
 
 apt-get install -y samba cifs-utils
-cp /vagrant/configs/smb.conf /etc/samba/smb.conf
+cp /vagrant/configs/samba/smb.conf /etc/samba/smb.conf
 
 (echo vagrant; echo vagrant) | smbpasswd -s -a vagrant
-cp /vagrant/configs/smbusers /etc/samba/smbusers
+cp /vagrant/configs/samba/smbusers /etc/samba/smbusers

@@ -18,12 +18,12 @@ parameters:
     pln_institution_name: 'PKP PLN Deposits from OJS'
     pln_data_dir: data
     clamdscan_path: /usr/bin/clamdscan
-    lockssomatic_sd_iri: 'http://localhost/lockssomatic/api/sword/2.0/sd-iri'
-    staging_server_uuid: 8EDAD2D3-23C2-4D5B-8DE0-C2654D0B1001
+    lockssomatic_sd_iri: http://localhost:8181/lockssomatic/web/app_dev.php/api/sword/2.0/sd-iri
+    staging_server_uuid: 1AAB46A6-DA24-410A-9344-CBD9C1991B70
     terms_of_use_default_locale: en-US
     router.request_context.host: 'localhost:8181'
     router.request_context.scheme: http
-    router.request_context.base_url: /westvaultpln/
+    router.request_context.base_url: /westvaultpln/web/app_dev.php
     save_deposit_xml: true
     network_accepting: 'The WestVault PLN can accept deposits from this provider.'
     network_default: 'The WestVault PLN does not know about this provider yet.'

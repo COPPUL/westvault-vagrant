@@ -26,3 +26,6 @@ parameters:
         ca.sfu.lib.plugin.pkppln.PkpPlnPlugin:
             - manifest_url
             - permission_url
+        ca.sfu.lib.plugin.coppul.WestVaultPlugin:
+            - manifest_url
+            - permission_url

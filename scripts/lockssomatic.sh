@@ -3,7 +3,7 @@
 pushd $HOME
 
 	# apache config
-	cp /vagrant/configs/apache.lockssomatic.conf /etc/apache2/sites-available/lockssomatic.conf
+	cp /vagrant/configs/apache/apache.lockssomatic.conf /etc/apache2/sites-available/lockssomatic.conf
 	ln -s /etc/apache2/sites-available/lockssomatic.conf /etc/apache2/sites-enabled/lockssomatic.conf
 	service apache2 restart
 
@@ -27,6 +27,7 @@ pushd $HOME
 		/usr/local/bin/composer --no-progress install
 		./app/console doctrine:schema:create
 		./app/console fos:user:create --super-admin admin@example.com admin Admin example.com
+		./app/console fos:user:promote admin@example.com ROLE_ADMIN
 		./app/console cache:clear		
 		chown -R vagrant:vagrant .
 	popd

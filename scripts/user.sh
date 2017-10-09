@@ -14,7 +14,7 @@ pushd $HOME
 		make
 	popd
 
-	cp /vagrant/configs/my.cnf /root/.my.cnf
+	cp /vagrant/configs/mysql/my.cnf /root/.my.cnf
 	chown -R root:root .
 popd
 
@@ -32,6 +32,6 @@ pushd ~vagrant
 		make
 	popd
 
-	cp /vagrant/configs/my.cnf /home/vagrant/.my.cnf
+	cp /vagrant/configs/mysql/my.cnf /home/vagrant/.my.cnf
 	chown -R vagrant:vagrant .
 popd
