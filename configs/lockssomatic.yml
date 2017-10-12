@@ -16,11 +16,12 @@ parameters:
     lockss_checksums:
         - SHA-1
     lockss_aus_per_titledb: 50
-    router.request_context.host: localhost
+    router.request_context.host: localhost:8181
     router.request_context.scheme: http
-    router.request_context.base_url: /lockssomatic
+    router.request_context.base_url: /lockssomatic/web/app_dev.php
     lockss_allowed_ips:
         - 127.0.0.1
+        - 10.0.0.0/8
     lom_cached_download_dir: data/download
     lom_nondefinitional_cpds:
         ca.sfu.lib.plugin.pkppln.PkpPlnPlugin:

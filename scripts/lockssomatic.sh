@@ -29,6 +29,10 @@ pushd $HOME
 		./app/console fos:user:create --super-admin admin@example.com admin Admin example.com
 		./app/console fos:user:promote admin@example.com ROLE_ADMIN
 		./app/console cache:clear		
+		
+		./app/console lom:import:plugin /vagrant/WestVaultPlugin.jar
+		chmod a+w data
+		
 		chown -R vagrant:vagrant .
 	popd
 
