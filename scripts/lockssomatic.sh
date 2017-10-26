@@ -20,9 +20,10 @@ pushd $HOME
 		chmod a+x app/console
 		cp /vagrant/configs/lockssomatic.yml app/config/parameters.yml
 		chown -R vagrant:vagrant .
-		
-		setfacl -R -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs}
-        setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs}
+	
+		mkdir data		
+		setfacl -R -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs,data}
+        setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs,data}
             
 		/usr/local/bin/composer --no-progress install
 		./app/console doctrine:schema:create
@@ -30,8 +31,7 @@ pushd $HOME
 		./app/console fos:user:promote admin@example.com ROLE_ADMIN
 		./app/console cache:clear		
 		
-		./app/console lom:import:plugin /vagrant/WestVaultPlugin.jar
-		chmod a+w data
+		./app/console lom:import:plugin /vagrant/lockss/WestVaultPlugin.jar
 		
 		chown -R vagrant:vagrant .
 	popd

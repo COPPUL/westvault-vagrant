@@ -1,4 +1,4 @@
-Owncloud:
+Getting the WestVault Vagrant Image Running.
 
 Set up LOCKSSOMatic
 
@@ -16,7 +16,7 @@ Create a new Content Provider in the LOCKSS menu. Use this information
     - Permission URL: http://localhost:8181/westvaultpln/web/app_dev.php/permission
     - Name: WestVault
     - Max File Size: 1000000 (that's about 100 Mb.)
-    - Max AU Size: 1000000 (that's about 100 Mb.)
+    - Max AU Size: 10000000 (that's about 1000 Mb.)
     - Content Owner: select the one created above.
     - Plugin: COPPUL WestVault PLN Plugin Version 3
     - PLN: select the one created above.
@@ -44,7 +44,8 @@ file lockss/mjoyce.keystore from the vagrant repository.
 
 Visit the PLN details page from the Networks menu -> Your network name
 Add the LOCKSS configuration parameters necessary for making all this work by clicking 
-on the details button under All Properties. Add these properties by entering the names and values and clicking on "Create":
+on the details button under All Properties. Add these properties by entering the names 
+and values and clicking on "Create":
 
 Name Value
 org.lockss.subscription.enabled: true
@@ -123,7 +124,8 @@ sudo -u www-data ./occ westvault:status
 
 Return to the OwnCloud WestVault page and see that the deposit statuses are updated.
 
-Now that the daemon has started, visit the LOCKSS admin pages and subscribe to the AUs. Login with lockss-u / lockss-p:
+Now that the daemon has started, visit the LOCKSS admin pages and subscribe to the AUs. 
+Login with lockss-u / lockss-p:
 
 http://localhost:8081
 http://localhost:8082
