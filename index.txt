@@ -2,26 +2,30 @@ Owncloud:
 
 Set up LOCKSSOMatic
 
-http://localhost:8181/lockssomatic
+http://localhost:8181/lockssomatic (admin@example.com / admin)
 
 Create a content owner from the LOCKSS menu.
 Build a new PLN in the LOCKSS Networks menu item.
   - You will need to provide a username and password that LOCKSSOMatic can use to 
     interact with LOCKSS. The accounts will be created in the daemons. 
+Log into the virtual machine by running "vagrant ssh".
+Change to the directory where LOCKSS-O-Matic is installed: "cd /var/www/lockssomatic".
+Import the WestVault LOCKSS plugin: "./app/console lom:import:plugin /vagrant/lockss/WestVaultPlugin.jar".
 Create a new Content Provider in the LOCKSS menu. Use this information
     - UUID: 1AAB46A6-DA24-410A-9344-CBD9C1991B70
     - Permission URL: http://localhost:8181/westvaultpln/web/app_dev.php/permission
     - Name: WestVault
     - Max File Size: 1000000 (that's about 100 Mb.)
+    - Max AU Size: 1000000 (that's about 100 Mb.)
     - Content Owner: select the one created above.
     - Plugin: COPPUL WestVault PLN Plugin Version 3
     - PLN: select the one created above.
-Save the PLN.
+Save the Content Provider.
 Visit the PLN details page from the Networks menu -> Your network name
 Add the four boxes for the LOCKSS test framework from 
 the Networks -> Your Network Name -> Boxes menu
 
-Add these boxes
+Add the first box using this information:
 	- Hostname: localhost
 	- Active: Yes
 	- Protocol: TCP
@@ -30,7 +34,7 @@ Add these boxes
 	- LOCKSS UI Port: 8081
 	- PLN: select the one created above.
 	
-The other three boxes have 
+Add three more using the same info as the first one with these port numbers:
 	LOCKSS ports 	9722 9723 9724. 
 	LOCKSS UI ports 8082 8083 8084.	
 
@@ -40,13 +44,14 @@ file lockss/mjoyce.keystore from the vagrant repository.
 
 Visit the PLN details page from the Networks menu -> Your network name
 Add the LOCKSS configuration parameters necessary for making all this work by clicking 
-on the details button under All Properties. Add these properties:
+on the details button under All Properties. Add these properties by entering the names and values and clicking on "Create":
 
+Name Value
 org.lockss.subscription.enabled: true
 org.lockss.ui.contactEmail: westvault@example.com
-org.lockss.ui.access.ip.include:
- - 192.168.100.0/24
- - 10.0.0.0/8
+org.lockss.ui.access.ip.include
+ - value 0: 192.168.100.0/24
+ - value 1: 10.0.0.0/8
 org.lockss.subscription.totalSubscriptionEnabled: true
 
 Finished configuring LOCKSSOMatic! Good time for ice cream.
@@ -55,17 +60,17 @@ Sign in to OwnCloud and agree to the terms of use.
     
 http://localhost:8181/owncloud
 
-Sign in with your credentials. 
-Go to the WestVault app in the top right menu. 
+Sign in with mark / mark.
+Go to the WestVault app in the top left menu. 
 Visit the settings page.
 Refresh the Terms of Use.
 Tick the agreement checkbox and save agreement.
 
 Now whitelist your UUID in the staging server.
 
-http://localhost:8181/westvaultpln/login
+http://localhost:8181/westvaultpln/web/login
 
-Sign in with your credentials.
+Sign in with your credentials (admin@example.com / admin).
 Find yourself in the list of providers.
 Copy your UUID
 Go to the Providers Whitelist page
@@ -73,12 +78,14 @@ Create a new whitelist entry with your copied UUID.
 
 Now you can send deposits from OwnCloud to the staging server.
 
-Return to the OwnCloud files page - there should be lockss-preserved and lockss-restored
+Return to the OwnCloud app Settings page. Scroll down and click on Save Settings.
+Go to the OwnCloud files page - there should be lockss-preserved and lockss-restored
 folders.
 Open the lockss-preserved folder and drag/drop files into it.
 Go back to the WestVault app, and see the files listed. They have no status information
 because they haven't been deposited yet.
 
+Log into the virtual machine by running "vagrant ssh".
 Do a vagrant ssh to get into the box and then run some commands.
 
 Send the deposit notifications to the staging server:
@@ -95,7 +102,7 @@ cd /var/www/westvaultpln
 Write the LOCKSSOmatic configuration files
 
 cd /var/www/lockssomatic
-./app/console lom:export:configs
+sudo ./app/console lom:export:configs
 
 Start up the LOCKSS four-box test framework. It takes a while.
 
@@ -107,7 +114,7 @@ cd test/framework/run_multiple_daemons
 While the LOCKSS boxes are starting, check the deposit statuses in the staging server.
 
 cd /var/www/westvaultpln
-./app/console pln:status --all -vv
+./app/console pln:status --all -vv [--all is not valid....]
 
 While the LOCKSS boxes are still starting, check the deposit statuses in OwnCloud.
 
@@ -116,7 +123,7 @@ sudo -u www-data ./occ westvault:status
 
 Return to the OwnCloud WestVault page and see that the deposit statuses are updated.
 
-Now that the daemon has started, visit the LOCKSS admin pages and subscribe to the AUs
+Now that the daemon has started, visit the LOCKSS admin pages and subscribe to the AUs. Login with lockss-u / lockss-p:
 
 http://localhost:8081
 http://localhost:8082
