@@ -42,4 +42,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: "scripts/staging.sh"
   config.vm.provision :shell, path: "scripts/lockssomatic.sh"
 
+
+# add some code to stop the LOCKSS daemon and maybe clean it up a bit here.
+# requires the vagrant trigger plugin.
+#  vagrant plugin install vagrant-triggers
+#   config.trigger.before :halt do  	
+#     run_remote  "bash /vagrant/cleanup.sh"
+#   end
+# 
+#   config.trigger.before :suspend do
+#     run_remote  "bash /vagrant/cleanup.sh"
+#   end
+
 end

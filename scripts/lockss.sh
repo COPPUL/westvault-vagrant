@@ -9,12 +9,11 @@ pushd /var/www
 	
 	pushd lockss-daemon
  		ant btf
- 		ant clean-tdbxml 		
+ 		ant clean-tdbxml 	
+		cp /vagrant/configs/lockss/lockss.txt test/frameworks/run_multiple_daemons/lockss.opt  			
  		sudo chown -R vagrant:vagrant .
 		
  		pushd test/frameworks/run_multiple_daemons
-			cp /vagrant/configs/lockss/lockss.txt lockss.opt
-			sudo chown -R vagrant:vagrant .
 			sudo -u vagrant ./start
 		popd
 	popd
