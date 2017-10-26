@@ -16,10 +16,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8181
   
   # lockss boxes in the test framework
-  config.vm.network "forwarded_port", guest: 8081, host: 8881
-  config.vm.network "forwarded_port", guest: 8082, host: 8882
-  config.vm.network "forwarded_port", guest: 8083, host: 8883
-  config.vm.network "forwarded_port", guest: 8084, host: 8884
+  config.vm.network "forwarded_port", guest: 8081, host: 8081
+  config.vm.network "forwarded_port", guest: 8082, host: 8082
+  config.vm.network "forwarded_port", guest: 8083, host: 8083
+  config.vm.network "forwarded_port", guest: 8084, host: 8084
   
   #mysql
   config.vm.network "forwarded_port", guest: 3306, host: 33306  
