@@ -203,7 +203,6 @@ CREATE TABLE `provider` (
 
 LOCK TABLES `provider` WRITE;
 /*!40000 ALTER TABLE `provider` DISABLE KEYS */;
-INSERT INTO `provider` (`id`, `uuid`, `name`, `email`) VALUES (1,'E1361745-C2B2-4EE5-9F7E-4CB34CE66594','corey',NULL);
 /*!40000 ALTER TABLE `provider` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -293,7 +292,6 @@ CREATE TABLE `whitelist` (
 
 LOCK TABLES `whitelist` WRITE;
 /*!40000 ALTER TABLE `whitelist` DISABLE KEYS */;
-INSERT INTO `whitelist` (`id`, `uuid`, `comment`, `created`) VALUES (1,'E1361745-C2B2-4EE5-9F7E-4CB34CE66594','a','2017-10-08 16:36:45');
 /*!40000 ALTER TABLE `whitelist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

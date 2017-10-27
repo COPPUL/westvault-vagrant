@@ -22,8 +22,8 @@ pushd $HOME
 		chown -R vagrant:vagrant .
 	
 		mkdir data		
-		setfacl -R -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs,data}
-        setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs,data}
+		setfacl -R -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs} data
+        setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX app/{cache,logs} data
             
 		/usr/local/bin/composer --no-progress install
 		./app/console doctrine:schema:create

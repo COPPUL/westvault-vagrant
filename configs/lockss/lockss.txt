@@ -1,2 +1,2 @@
 org.lockss.ui.access.ip.include=10.0.0.0/8
-org.lockss.auxPropUrls=http://localhost:8181/lockssomatic/web/app_dev.php/plnconfigs/1/properties/lockss.xml
+org.lockss.auxPropUrls=http://localhost:8181/lockssomatic/plnconfigs/1/properties/lockss.xml

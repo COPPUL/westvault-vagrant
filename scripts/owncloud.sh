@@ -40,7 +40,7 @@ pushd $HOME
 			--admin-user=admin --admin-pass=admin
 
 		./occ config:system:set debug --value=true
-		./occ config:system:set pln_site_url --value=http://localhost:8181/westvaultpln/web/app_dev.php/api/sword/2.0/sd-iri
+		./occ config:system:set pln_site_url --value=http://localhost:8181/westvaultpln/api/sword/2.0/sd-iri
 		./occ config:system:set overwrite.cli.url --value=http://localhost:8181/owncloud
 		
 		# add the westvault app.
@@ -53,9 +53,9 @@ pushd $HOME
 		./occ app:enable westvault 
 	
 		
-		OC_PASS=corey  ./occ user:add --password-from-env --group=uvic corey
-		OC_PASS=mark   ./occ user:add --password-from-env --group=sfu mark
-		OC_PASS=janice ./occ user:add --password-from-env --group=sfu janice
+		OC_PASS=corey   ./occ user:add --password-from-env --group=uvic corey
+		OC_PASS=mark    ./occ user:add --password-from-env --group=sfu mark
+		OC_PASS=michael ./occ user:add --password-from-env --group=sfu michael
 		
 		chown -R www-data:www-data config data
 		setfacl -R -m u:www-data:rwX -m u:vagrant:rwX config data
