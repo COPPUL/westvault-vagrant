@@ -13,8 +13,5 @@ pushd /var/www
 		cp /vagrant/configs/lockss/lockss.txt test/frameworks/run_multiple_daemons/lockss.opt  			
  		sudo chown -R vagrant:vagrant .
 		
- 		pushd test/frameworks/run_multiple_daemons
-			sudo -u vagrant ./start
-		popd
 	popd
 popd
