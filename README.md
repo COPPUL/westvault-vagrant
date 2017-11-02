@@ -23,12 +23,12 @@ There is quite a bit of manual setup involved in getting all the pieces - OwnClo
 * Create a content owner from the LOCKSS menu.
 * Build a new PLN (network) in the LOCKSS Networks menu item.
   * You will need to provide a username and password that LOCKSSOMatic can use to interact with LOCKSS. Accounts using these credentials will be created in the LOCKSS daemons. Note: do not use an email address as the username.
-  * The WestVault LOCKSS Plugin should already be loaded. Check that it is in the LOCKSS -> Plugins menu item. If it isn't,
+  * The WestVault LOCKSS Plugin should already be loaded. Check that it is in the LOCKSS -> Plugins menu item. If it isn't, do the following:
     * Log into the virtual machine by running "vagrant ssh" in your vagrant directory.
     * Change to the directory where LOCKSS-O-Matic is installed: "cd /var/www/lockssomatic".
     * Import the WestVault LOCKSS plugin: "./app/console lom:import:plugin /vagrant/lockss/WestVaultPlugin.jar".
 * Create a new Content Provider in the LOCKSS menu. Use this information:
-* UUID: 1AAB46A6-DA24-410A-9344-CBD9C1991B70
+  * UUID: 1AAB46A6-DA24-410A-9344-CBD9C1991B70
   * Permission URL: http://localhost:8181/westvaultpln/web/app_dev.php/permission
   * Name: WestVault
   * Max File Size: 1000000 (that's about 100 Mb.)
@@ -48,8 +48,12 @@ There is quite a bit of manual setup involved in getting all the pieces - OwnClo
   * LOCKSS UI Port: 8081
   * PLN: select the one created above.
   * Add three more using the same info as the first one (using the Networks -> Your Network Name -> Boxes menu) with these port numbers:
-    * LOCKSS ports: 9722 9723 9724.
-    * LOCKSS UI ports: 8082 8083 8084.
+
+LOCKSS ports | LOCKSS UI ports
+9722 | 8082
+9723 | 8083
+9724 | 8084
+
 * Visit the PLN details page from the Networks menu -> Your network name
 * Upload the public keystore by clicking on the Keystore button. Upload the file [vagrant directory]/lockss/mjoyce.keystore from the vagrant repository.
 * Visit the PLN details page from the Networks menu -> Your network name
@@ -77,8 +81,8 @@ Finished configuring LOCKSS-O-Matic! Good time for ice cream.
 
 * Sign into the staging server at http://localhost:8181/westvaultpln/login (admin@example.com / admin)
 * Find yourself in the list of providers and click on your name.
-* Copy your UUID
-* Go to the Providers Whitelist page
+* Copy your UUID.
+* Go to the Providers Whitelist page.
 * Create a new whitelist entry with your copied UUID.
 
 Now you can send deposits from OwnCloud to the staging server.
@@ -123,7 +127,7 @@ Now we get to log into out LOCKSS boxes. Visit the LOCKSS admin pages listed bel
 
 Subscribe to the AUs by going to Journal Configuration -> Add Titles To Subscription Management and then tick the checkbox to the right of "WestVault Staging Server (1 T) (1 AU)" (in the Publisher/Publication Overall Subscription column) until it says "Subscribe All" then click the "Add" button.
 
-Wait for a few minutes. The LOCKSS boxes are harvesting your content from the staging server. If you want to see your harvested content, visit the "Daemon Status" page in the LOCKSS admin user interface. You should see "LOCKSSOMatic AU PKP PLN Deposits from OJS Deposit from WestVault part 1" in the list. If you click on this link, you will see the files you deposited in OwnCloud, named like "http://localhost:8181/westvaultpln/fetch/48CA97CA-78E3-4748-8822-1A3B64F273CD/49259DD6-9635-4B89-B707-79A79926BD3C", at the bottom of the list of AU content.
+Wait for a few minutes. The LOCKSS boxes are harvesting your content from the staging server. If you want to see your harvested content, visit the "Daemon Status" page in the LOCKSS admin user interface. You should see "LOCKSSOMatic AU PKP PLN Deposits from OJS Deposit from WestVault part 1" in the list. If you click on this link, you will see the files you deposited in OwnCloud, named like `http://localhost:8181/westvaultpln/fetch/48CA97CA-78E3-4748-8822-1A3B64F273CD/49259DD6-9635-4B89-B707-79A79926BD3C`, at the bottom of the list of AU content.
 
 * Once the content has been harvested, check the deposit statuses in LOCKSSOMatic. At the command line, run:
   * `cd /var/www/lockssomatic`
