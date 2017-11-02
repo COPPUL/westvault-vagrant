@@ -50,6 +50,7 @@ There is quite a bit of manual setup involved in getting all the pieces - OwnClo
   * Add three more using the same info as the first one (using the Networks -> Your Network Name -> Boxes menu) with these port numbers:
 
 LOCKSS ports | LOCKSS UI ports
+--- | ---
 9722 | 8082
 9723 | 8083
 9724 | 8084
