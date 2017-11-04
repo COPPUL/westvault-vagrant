@@ -140,4 +140,10 @@ Wait for a few minutes. The LOCKSS boxes are harvesting your content from the st
   * `cd /var/www/owncloud`
   * `sudo -u www-data ./occ westvault:status`
 
-Return to the OwnCloud WestVault page and see that the deposit statuses are in Agreement. At this point, your files are ready to restore.
+Return to the OwnCloud WestVault page and see that the deposit statuses are in Agreement. At this point, your files are ready to restore. Click the Restore button next to one or more deposits that have reached Agreement. They will be added to the restore queue.
+
+* After queueing some deposits, run the restore command in OwnCloud. At the command line, run
+  * `cd /var/www/owncloud`
+  * `sudo -u www-data ./occ westvault:restore`
+
+This should download the queued deposits from the LOCKSS network via LOCKSSOMatic and the staging server and place them in the lockss-preserved folder. The status on the deposits should change to restore-complete. 
