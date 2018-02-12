@@ -22,7 +22,7 @@ There is quite a bit of manual setup involved in getting all the pieces - OwnClo
 * Log in at http://localhost:8181/lockssomatic (admin@example.com / admin)
 * Create a content owner from the LOCKSS menu.
 * Build a new PLN (network) in the LOCKSS Networks menu item.
-  * You will need to provide a username and password that LOCKSSOMatic can use to interact with LOCKSS. Accounts using these credentials will be created in the LOCKSS daemons. Note: do not use an email address as the username.
+  * You will need to provide a username and password that LOCKSSOMatic can use to interact with LOCKSS. Accounts using these credentials will be created in the LOCKSS daemons. Note: do not use an email address as the username. Do not enable the ContentUI.
   * The WestVault LOCKSS Plugin should already be loaded. Check that it is in the LOCKSS -> Plugins menu item. If it isn't, do the following:
     * Log into the virtual machine by running "vagrant ssh" in your vagrant directory.
     * Change to the directory where LOCKSS-O-Matic is installed: "cd /var/www/lockssomatic".
