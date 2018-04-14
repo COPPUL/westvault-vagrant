@@ -8,6 +8,7 @@ Install the following prerequisites on your laptop or desktop:
 
 1. [VirtualBox](https://www.virtualbox.org/)
 2. [Vagrant](http://www.vagrantup.com/)
+3. [Vagrant Disk Size Plugin](https://github.com/sprotheroe/vagrant-disksize)
 
 ## Setting up your virtual machine
 
