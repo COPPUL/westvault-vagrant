@@ -16,8 +16,8 @@ pushd $HOME
 	service apache2 restart
 
 	# get the OC code 
-	wget --quiet https://download.owncloud.org/community/owncloud-9.1.6.tar.bz2
-	tar -xjf owncloud-9.1.6.tar.bz2
+	wget --quiet https://download.owncloud.org/community/owncloud-9.1.7.tar.bz2
+	tar -xjf owncloud-9.1.7.tar.bz2
 	mv owncloud /var/www/owncloud
 	chown -R vagrant:vagrant /var/www/owncloud
 
