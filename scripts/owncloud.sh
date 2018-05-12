@@ -2,8 +2,6 @@
 
 pushd $HOME
 
-	apt-get install -y php5-gd php5-mcrypt php5-imagick libxml2-utils python3 python3-pip
-
 	# OC Dev tool
 	git clone https://github.com/owncloudarchive/ocdev.git
 	pushd ocdev
