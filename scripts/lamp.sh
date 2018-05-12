@@ -20,7 +20,8 @@ apt-get update
 
 apt-get -y install apache2 php5.6 php5.6-dev php5.6-xsl php5.6-curl php5.6-cli \
 	php5.6-intl php5.6-json php5.6-zip php5.6-mbstring php5.6-gd php5.6-mysql \
-	php5.6-mcrypt php5.6-imagick php5.6-soap libxml2-utils python3 python3-pip 
+	php5.6-mcrypt php5.6-imagick php5.6-soap php5.6-sqlite3 \
+	libxml2-utils python3 python3-pip 
 	
 pear install Archive_Tar
 a2enmod rewrite headers env dir mime
