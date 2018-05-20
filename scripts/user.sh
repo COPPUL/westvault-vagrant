@@ -16,7 +16,7 @@ pushd $HOME
 
 	cp /vagrant/configs/mysql/my.cnf /root/.my.cnf
 	
-	git config --global credential.helper store	
+	git config --global credential.helper store
 	chown -R root:root .	
 popd
 
@@ -35,6 +35,6 @@ pushd ~vagrant
 	popd
 
 	cp /vagrant/configs/mysql/my.cnf /home/vagrant/.my.cnf
-	git config --global credential.helper store	
+	git config --global credential.helper store
 	chown -R vagrant:vagrant .
 popd

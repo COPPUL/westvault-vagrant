@@ -57,30 +57,6 @@ INSERT INTO `appuser` (`id`, `username`, `username_canonical`, `email`, `email_c
 UNLOCK TABLES;
 
 --
--- Table structure for table `au_container`
---
-
-DROP TABLE IF EXISTS `au_container`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `au_container` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `open` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `au_container`
---
--- ORDER BY:  `id`
-
-LOCK TABLES `au_container` WRITE;
-/*!40000 ALTER TABLE `au_container` DISABLE KEYS */;
-/*!40000 ALTER TABLE `au_container` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `blacklist`
 --
 
@@ -116,7 +92,7 @@ DROP TABLE IF EXISTS `deposit`;
 CREATE TABLE `deposit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `provider_id` int(11) DEFAULT NULL,
-  `au_container_id` int(11) DEFAULT NULL,
+  `institution` VARCHAR(64) NOT NULL,
   `file_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `deposit_uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
   `received` datetime NOT NULL,
@@ -136,8 +112,6 @@ CREATE TABLE `deposit` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_95DB9D39E2AB67BD` (`deposit_uuid`),
   KEY `IDX_95DB9D39A53A8AA` (`provider_id`),
-  KEY `IDX_95DB9D39ABD493AD` (`au_container_id`),
-  CONSTRAINT `FK_95DB9D39ABD493AD` FOREIGN KEY (`au_container_id`) REFERENCES `au_container` (`id`),
   CONSTRAINT `FK_95DB9D39A53A8AA` FOREIGN KEY (`provider_id`) REFERENCES `provider` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
