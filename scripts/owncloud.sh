@@ -10,6 +10,7 @@ pushd $HOME
 
 	# configure apache
 	cp /vagrant/configs/httpd/httpd.owncloud.conf /etc/httpd/conf.d/owncloud.conf
+	rm /etc/httpd/conf.modules.d/00-dav.conf
 	systemctl restart httpd
 
 	# get the OC code
@@ -37,7 +38,7 @@ pushd $HOME
 			--admin-user=admin --admin-pass=admin
 
 		./occ config:system:set debug --value=true
-		./occ config:system:set pln_site_url --value=http://localhost:8181/westvaultpln/api/sword/2.0/sd-iri
+		./occ config:system:set pln_site_url --value=http://localhost:8181/westvault/api/sword/2.0/sd-iri
 		./occ config:system:set overwrite.cli.url --value=http://localhost:8181/owncloud
 
 		# add the westvault app.
@@ -57,8 +58,6 @@ pushd $HOME
 		chown -R apache:apache config data
 		setfacl -R -m u:apache:rwX -m u:vagrant:rwX config data
 		setfacl -dR -m u:apache:rwX -m u:vagrant:rwX config data
-
-		# add some users.
 	popd
 
 popd

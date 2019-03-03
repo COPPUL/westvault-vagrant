@@ -2,8 +2,8 @@
 parameters:
     database_host: 127.0.0.1
     database_port: null
-    database_name: westvaultpln
-    database_user: westvaultpln
+    database_name: westvault
+    database_user: westvault
     database_password: pln123
     mailer_transport: smtp
     mailer_host: 127.0.0.1
@@ -23,7 +23,7 @@ parameters:
     terms_of_use_default_locale: en-US
     router.request_context.host: 'localhost:8181'
     router.request_context.scheme: http
-    router.request_context.base_url: /westvaultpln
+    router.request_context.base_url: /westvault
     save_deposit_xml: true
     network_accepting: 'The WestVault PLN can accept deposits from this provider.'
     network_default: 'The WestVault PLN does not know about this provider yet.'

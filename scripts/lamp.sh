@@ -18,6 +18,7 @@ ENDSQL
 
 # apache2
 yum install -y httpd httpd-tools
+cp /vagrant/configs/httpd/httpd.ports.conf /etc/httpd/conf.d/ports.conf
 systemctl enable httpd.service
 systemctl start httpd.service
 
@@ -31,9 +32,6 @@ yum install -y ImageMagick php php-xml php-fpm php-gd \
 
 yum install -y php-posix --enablerepo=remi
 sed -i -e 's/;date.timezone =/date.timezone = America\/Vancouver/' /etc/php.ini
-
-cp /vagrant/configs/httpd/php.conf /etc/httpd/conf.d/php.conf
-cp /vagrant/configs/httpd/10-php.conf /etc/httpd/conf.modules.d/10-php.conf
 
 systemctl enable php-fpm.service
 systemctl start php-fpm.service

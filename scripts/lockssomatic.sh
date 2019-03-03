@@ -3,13 +3,13 @@
 pushd $HOME
 
 	# apache config
-	cp /vagrant/configs/httpd/httpd.lockssomatic.conf /etc/apache2/conf.d/lockssomatic.conf
+	cp /vagrant/configs/httpd/httpd.lockssomatic.conf /etc/httpd/conf.d/lockssomatic.conf
 	systemctl restart httpd
 
 	# database
-	mysql -e "CREATE USER 'lockssomatic'@'localhost'"
+	mysql -e "CREATE USER lockssomatic@localhost"
 	mysql -e "CREATE DATABASE lockssomatic"
-	mysql -e "GRANT ALL ON lockssomatic.* TO 'lockssomatic'@'localhost'"
+	mysql -e "GRANT ALL ON lockssomatic.* TO lockssomatic@localhost"
 	mysql -e "SET PASSWORD FOR lockssomatic@localhost = PASSWORD('lom123')"
 
 	# app

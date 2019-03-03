@@ -17,21 +17,21 @@ pushd $HOME
 	# popd
 
 	# apache config
-	cp /vagrant/configs/httpd/httpd.westvaultpln.conf /etc/httpd/conf.d/westvaultpln.conf
+	cp /vagrant/configs/httpd/httpd.westvault.conf /etc/httpd/conf.d/westvault.conf
 	systemctl restart httpd
 
 	# database
-	mysql -e "CREATE USER 'westvaultpln'@'localhost'"
-	mysql -e "CREATE DATABASE westvaultpln"
-	mysql -e "GRANT ALL ON westvaultpln.* TO 'westvaultpln'@'localhost'"
-	mysql -e "SET PASSWORD FOR westvaultpln@localhost = PASSWORD('pln123')"
+	mysql -e "CREATE USER westvault@localhost"
+	mysql -e "CREATE DATABASE westvault"
+	mysql -e "GRANT ALL ON westvault.* TO westvault@localhost"
+	mysql -e "SET PASSWORD FOR westvault@localhost = PASSWORD('pln123')"
 
 	# app
-	git clone https://github.com/ubermichael/westvault-pln.git westvaultpln
-	mv westvaultpln /var/www/westvaultpln
-	pushd /var/www/westvaultpln
+	git clone https://github.com/ubermichael/westvault-pln.git westvault
+	mv westvault /var/www/westvault
+	pushd /var/www/westvault
 		chmod a+x app/console
-		cp /vagrant/configs/westvaultpln.yml app/config/parameters.yml
+		cp /vagrant/configs/westvault.yml app/config/parameters.yml
 		chown -R vagrant:vagrant .
 
 		setfacl -R -m u:apache:rwX -m u:vagrant:rwX app/{cache,logs}
@@ -41,7 +41,7 @@ pushd $HOME
 		php app/console doctrine:schema:create
 		php app/console fos:user:create --super-admin admin@example.com admin Admin example.com
 		php app/console fos:user:promote admin@example.com ROLE_ADMIN
-		mysql westvaultpln < /vagrant/sql/westvaultpln.sql
+		mysql westvault < /vagrant/sql/westvault.sql
 		chown -R vagrant:vagrant .
 	popd
 
