@@ -100,7 +100,7 @@ CREATE TABLE `deposit` (
   `checksum_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `checksum_value` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `url` varchar(2048) COLLATE utf8_unicode_ci NOT NULL,
-  `size` int(11) NOT NULL,
+  `size` bigint(11) NOT NULL,
   `state` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `error_log` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
   `error_count` int(11) NOT NULL,

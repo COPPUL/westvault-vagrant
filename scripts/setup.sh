@@ -1,15 +1,19 @@
 #!/bin/bash
 
+# do some yum things.
+yum update -y
 
-# safety first.
-apt-get -y update
-apt-get -y upgrade
+# add the epel repo.
+yum install -y epel-release yum-utils ntpdate
+
+# what time is it?
+ntpdate -u ntp.ubc.ca
 
 # time is difficult.
 timedatectl set-timezone America/Vancouver
 
 # basics.
-apt-get -y install git vim wget curl emacs24-nox php-elisp gnupg zip unzip ntp
+yum install -y git vim wget curl emacs-nox gnupg zip unzip make
 
-# what time is it?
-ntpdate -u ntp.ubuntu.com
+# make selinux permissive.
+setenforce 0

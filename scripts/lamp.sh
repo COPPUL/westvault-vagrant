@@ -1,38 +1,44 @@
 #!/bin/bash
 
-# mysql is a PITA. 
-export DEBIAN_FRONTEND="noninteractive"
-apt-get -y install debconf-utils
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
-apt-get -y install mysql-client mysql-server 
+# mysql
+yum install -y mariadb-server mariadb
+cp /vagrant/configs/mysql/my.cnf /etc/my.cnf
+systemctl enable mariadb
+systemctl start mariadb
 
-cp /vagrant/configs/mysql/mysql.server.cnf /etc/mysql/my.cnf
+# equivalent to mysql_secure_installation
+mysql --no-defaults <<ENDSQL
+UPDATE mysql.user SET password=PASSWORD('root') WHERE user='root';
+DELETE FROM mysql.user WHERE user='';
+DELETE FROM mysql.user WHERE user='root' AND host NOT IN ('localhost', '127.0.0.1', '::1');
+DROP DATABASE test;
+DELETE FROM mysql.db WHERE db='test' OR db LIKE 'test_%';
+FLUSH PRIVILEGES;
+ENDSQL
 
-mysql --defaults-file=/vagrant/configs/mysql/my.cnf -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';"
-mysql --defaults-file=/vagrant/configs/mysql/my.cnf -e "FLUSH PRIVILEGES;"
+# apache2
+yum install -y httpd httpd-tools
+systemctl enable httpd.service
+systemctl start httpd.service
 
-service mysql restart
+# php 5.4? No thank you.
+yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum-config-manager --enable remi-php56
 
-# LAMP
-add-apt-repository -y ppa:ondrej/php
-apt-get update
+yum install -y ImageMagick php php-xml php-fpm php-gd \
+  php-mbstring php-mysqlnd php-opcache php-pecl-imagick \
+  php-pecl-mysql php-pecl-zip php-soap
 
-apt-get -y install apache2 php5.6 php5.6-dev php5.6-xsl php5.6-curl php5.6-cli \
-	php5.6-intl php5.6-json php5.6-zip php5.6-mbstring php5.6-gd php5.6-mysql \
-	php5.6-mcrypt php5.6-imagick php5.6-soap php5.6-sqlite3 \
-	libxml2-utils python3 python3-pip 
-	
-pear install Archive_Tar
-a2enmod rewrite headers env dir mime
-cp /vagrant/configs/apache/apache.ports.conf /etc/apache2/ports.conf
-service apache2 restart
+yum install -y php-posix --enablerepo=remi
+sed -i -e 's/;date.timezone =/date.timezone = America\/Vancouver/' /etc/php.ini
 
-# composer
+cp /vagrant/configs/httpd/php.conf /etc/httpd/conf.d/php.conf
+cp /vagrant/configs/httpd/10-php.conf /etc/httpd/conf.modules.d/10-php.conf
+
+systemctl enable php-fpm.service
+systemctl start php-fpm.service
+systemctl restart httpd.service
+
 curl -Ss https://getcomposer.org/installer | php -- --quiet --install-dir=/usr/local/bin --filename=composer
 
-chmod -R a+r /var/log/apache2
-chmod a+x /var/log/apache2
-
-# uhh. file permissions are getting screwed up sometimes.
-# chown -R www-data:www-data /var/lib/php5
+echo "<?php phpinfo(); ?>" > /var/www/info.php
