@@ -24,7 +24,7 @@ pushd $HOME
 		setfacl -R -m u:apache:rwX -m u:vagrant:rwX app/{cache,logs} data
     setfacl -dR -m u:apache:rwX -m u:vagrant:rwX app/{cache,logs} data
 
-		sudo -u vagrant /usr/local/bin/composer --no-progress install
+		sudo -u vagrant /usr/local/bin/composer --quiet --no-progress install
 		./app/console doctrine:schema:create
 		./app/console fos:user:create --super-admin admin@example.com admin Admin example.com
 		./app/console fos:user:promote admin@example.com ROLE_ADMIN
