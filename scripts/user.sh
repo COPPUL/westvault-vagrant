@@ -1,23 +1,19 @@
 #!/bin/bash
 
+if [ -z "$PS1" ]; then
+	set -euo pipefail
+	unalias -a
+fi
+
 # openssl passwd -crypt abc123
 PW=GmZnvZfCpA1K6
 useradd -m -p $PW -s /bin/bash mjoyce
 echo '%mjoyce ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/mjoyce
 
-for user in /root /home/vagrant /home/mjoyce; do
-	pushd $user
-		git clone https://github.com/ubermichael/dot-files.git
-			pushd dot-files
-				./install.sh
-			popd
-
-		git clone https://github.com/ubermichael/dot-emacs.git
-		pushd dot-emacs
-			make
-		popd
-
-		cp -f /vagrant/configs/mysql/my.cnf /root/.my.cnf
+for dir in /root /home/mjoyce /home/vagrant; do
+	pushd $dir
+		cp /vagrant/configs/user/bashrc $dir/.bashrc
+		cp /vagrant/configs/user/my.cnf $dir/.my.cnf
 	popd
 done
 

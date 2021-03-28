@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -z "$PS1" ]; then
+	set -euo pipefail
+	unalias -a
+fi
+
 # do some yum things.
 yum update -y
 
@@ -13,7 +18,7 @@ ntpdate -u ntp.ubc.ca
 timedatectl set-timezone America/Vancouver
 
 # basics.
-yum install -y git vim wget curl emacs-nox gnupg zip unzip make
+yum install -y git curl emacs-nox gnupg zip unzip make perl bzip2
 
 # make selinux permissive.
 setenforce 0

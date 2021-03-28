@@ -1,20 +1,21 @@
 #!/bin/bash
 
+if [ -z "$PS1" ]; then
+	set -euo pipefail
+	unalias -a
+fi
+
 pushd $HOME
 
-	# OC Dev tool
-	git clone https://github.com/owncloudarchive/ocdev.git
-	pushd ocdev
-		make -q install
-	popd
+	yum install -y python3
 
 	# configure apache
 	cp /vagrant/configs/httpd/httpd.owncloud.conf /etc/httpd/conf.d/owncloud.conf
-	rm /etc/httpd/conf.modules.d/00-dav.conf
+	rm -f /etc/httpd/conf.modules.d/00-dav.conf
 	systemctl restart httpd
 
 	# get the OC code
-	wget --quiet https://download.owncloud.org/community/owncloud-9.1.8.tar.bz2
+	curl -O https://attic.owncloud.org/community/owncloud-9.1.8.tar.bz2
 	tar -xjf owncloud-9.1.8.tar.bz2
 	mv owncloud /var/www/owncloud
 	chown -R vagrant:vagrant /var/www/owncloud
@@ -31,15 +32,15 @@ pushd $HOME
 	pushd /var/www/owncloud
 
 		chmod a+x occ
-		./occ maintenance:install \
+		sudo -u vagrant ./occ maintenance:install \
 			--no-interaction \
 			--database=mysql --database-name=owncloud \
 			--database-user=owncloud --database-pass=occ123 \
 			--admin-user=admin --admin-pass=admin
 
-		./occ config:system:set debug --value=true
-		./occ config:system:set pln_site_url --value=http://localhost:8181/westvault/api/sword/2.0/sd-iri
-		./occ config:system:set overwrite.cli.url --value=http://localhost:8181/owncloud
+		sudo -u vagrant ./occ config:system:set debug --value=true
+		sudo -u vagrant ./occ config:system:set pln_site_url --value=http://localhost:8181/westvault/api/sword/2.0/sd-iri
+		sudo -u vagrant ./occ config:system:set overwrite.cli.url --value=http://localhost:8181/owncloud
 
 		# add the westvault app.
 		git clone https://github.com/ubermichael/westvault.git apps/westvault
@@ -48,12 +49,11 @@ pushd $HOME
 		pushd apps/westvault
 			sudo -u vagrant /usr/local/bin/composer --no-progress install
 		popd
-		./occ app:enable westvault
+		sudo -u vagrant ./occ app:enable westvault
 
-
-		OC_PASS=corey   ./occ user:add --password-from-env --group=uvic corey
-		OC_PASS=mark    ./occ user:add --password-from-env --group=sfu mark
-		OC_PASS=michael ./occ user:add --password-from-env --group=sfu michael
+		sudo -u vagrant OC_PASS=corey   ./occ user:add --password-from-env --group=uvic corey
+		sudo -u vagrant OC_PASS=mark    ./occ user:add --password-from-env --group=sfu mark
+		sudo -u vagrant OC_PASS=michael ./occ user:add --password-from-env --group=sfu michael
 
 		chown -R apache:apache config data
 		setfacl -R -m u:apache:rwX -m u:vagrant:rwX config data

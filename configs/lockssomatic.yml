@@ -30,3 +30,6 @@ parameters:
         ca.sfu.lib.plugin.coppul.WestVaultPlugin:
             - manifest_url
             - permission_url
+    lom_boxstatus_subject: 'PKP PLN Box Status'
+    lom_boxstatus_sender: noreply@pkp-pln.lib.sfu.ca
+    lom_boxstatus_contact: pkppln@example.com

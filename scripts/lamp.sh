@@ -1,8 +1,13 @@
 #!/bin/bash
 
+if [ -z "$PS1" ]; then
+	set -euo pipefail
+	unalias -a
+fi
+
 # mysql
 yum install -y mariadb-server mariadb
-cp /vagrant/configs/mysql/my.cnf /etc/my.cnf
+cp /vagrant/configs/mysql/mysql.server.cnf /etc/my.cnf
 systemctl enable mariadb
 systemctl start mariadb
 
@@ -37,6 +42,6 @@ systemctl enable php-fpm.service
 systemctl start php-fpm.service
 systemctl restart httpd.service
 
-curl -Ss https://getcomposer.org/installer | php -- --quiet --install-dir=/usr/local/bin --filename=composer
+curl -Ss https://getcomposer.org/installer | php -- --version=1.10.20 --quiet --install-dir=/usr/local/bin --filename=composer
 
-echo "<?php phpinfo(); ?>" > /var/www/info.php
+echo "<?php phpinfo(); ?>" > /var/www/html/info.php

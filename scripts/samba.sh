@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -z "$PS1" ]; then
+	set -euo pipefail
+	unalias -a
+fi
+
 yum install -y samba cifs-utils
 cp -f /vagrant/configs/samba/smb.conf /etc/samba/smb.conf
 
